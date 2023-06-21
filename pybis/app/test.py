@@ -1,6 +1,6 @@
 import pybis as pb
 
-o = pb.Openbis("https://openbis", verify_certificates=False)
+o = pb.Openbis("https://openbis-local", verify_certificates=False)
 o.login("admin", "changeit")
 
 # Create a new object
