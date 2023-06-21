@@ -10,7 +10,7 @@ stages:
 
 
 services:
-  - name: debian-openbis:latest
+  - name: openbis/debian-openbis
     alias: openbis
     variables:
       #Here you can configure some openbis options for the AS
