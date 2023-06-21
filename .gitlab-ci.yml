@@ -1,0 +1,25 @@
+
+before_script:
+  - docker info
+
+stages:
+  - docker
+  - test
+ 
+
+build_pybis:
+  stage: docker
+  image: docker:latest
+  services:
+    - docker:dind
+  tags:
+    - dind
+  before_script:
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+  script:
+    - docker build --pull -t $CI_REGISTRY_IMAGE ./pybis
+    - docker push $CI_REGISTRY_IMAGE
+  only:
+    changes:
+      - ./pybis/Dockerfile
+      - ./pybis/requirements.txt
