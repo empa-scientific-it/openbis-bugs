@@ -9,6 +9,7 @@ stages:
 
 
 
+
 services:
   - name: registry-1.docker.io/openbis/debian-openbis
     alias: openbis-local
@@ -35,10 +36,8 @@ build-docker:
     - docker push $CI_REGISTRY_IMAGE
   rules:
     - changes:
-        - pybis/Dockerfile
-        - pybis/requirements.txt
-        - pybis/app/*
-
+      - /pybis/Dockerfile
+      when: always
 
 
 
