@@ -14,9 +14,9 @@ run_tests:
   before_script:
     - pip install -r pybis/requirements.txt
   script:
-    - python ./pybis/app/tests.py
+    - python pybis/app/tests.py
   only:
     changes:
-      - ./pybis/Dockerfile
-      - ./pybis/requirements.txt
-      - ./pybis/app/tests.py
+      - pybis/Dockerfile
+      - pybis/requirements.txt
+      - pybis/app/tests.py
