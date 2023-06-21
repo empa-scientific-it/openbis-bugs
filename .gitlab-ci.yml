@@ -33,11 +33,12 @@ build-docker:
   script:
     - docker build --pull -t $CI_REGISTRY_IMAGE ./pybis
     - docker push $CI_REGISTRY_IMAGE
-  only:
-    changes:
-      - ./pybis/Dockerfile
-      - ./pybis/requirements.txt
-      - ./pybis/app/*
+  # only:
+  #   changes:
+  #     - ./pybis/Dockerfile
+  #     - ./pybis/requirements.txt
+  #     - ./pybis/app/*
+
 
 
 
