@@ -39,6 +39,7 @@ build-docker:
       - /pybis/Dockerfile
       - /pybis/requirements.txt
       - /pybis/app/*
+      when: always
 
 
 
