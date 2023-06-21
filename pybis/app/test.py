@@ -1,6 +1,12 @@
 import pybis as pb
+import argparse as ap
 
-o = pb.Openbis("https://openbis-local", verify_certificates=False)
+ap = ap.ArgumentParser()
+ap.add_argument("host", required=True, help="OpenBIS host")
+args = ap.parse_args()
+
+o = pb.Openbis(args.host, verify_certificates=False)
+
 o.login("admin", "changeit")
 
 # Create a new object

@@ -37,6 +37,8 @@ build-docker:
   rules:
     - changes:
       - /pybis/Dockerfile
+      - /pybis/requirements.txt
+      - /pybis/app/*
 
 
 
