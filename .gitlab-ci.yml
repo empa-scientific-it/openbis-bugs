@@ -48,6 +48,6 @@ run-tests:
     name: $CI_REGISTRY_IMAGE
     entrypoint: [""]
   before_script:
-    - ./check_openbis.sh https://openbis:443
+    - /app/check_openbis.sh https://openbis:443
   script:
     - python /app/tests/test.py
