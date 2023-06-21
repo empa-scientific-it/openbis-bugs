@@ -51,4 +51,4 @@ run-tests:
   before_script:
     - /app/check_openbis.sh https://openbis-local:443
   script:
-    - python /app/tests/test.py
+    - python /app/test.py
