@@ -10,7 +10,7 @@ stages:
 
 
 services:
-  - name: docker.io/openbis/debian-openbis:latest
+  - name: debian-openbis:latest
     alias: openbis
     variables:
       #Here you can configure some openbis options for the AS
