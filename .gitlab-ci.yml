@@ -8,15 +8,42 @@ stages:
 
 
 
-run_tests:
-  stage: test
-  image: python:latest
+
+services:
+  - name: openbis/debian-openbis
+    alias: openbis
+    variables:
+      #Here you can configure some openbis options for the AS
+      SERVER_HOST_PORT: "localhost:8443"
+      GROUP_ID: "1000"
+      #Enable the basic plugins
+      CORE_PLUGINS: "enabled-modules = dataset-uploader, dataset-file-search, xls-import, eln-lims, openbis-ng-ui, search-store, user-management-maintenance"
+
+
+
+build-docker:
+  stage: docker
+  image: docker:latest
+  services:
+    - docker:dind
+  tags:
+    - dind
   before_script:
-    - pip install -r pybis/requirements.txt
+    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
   script:
-    - python pybis/app/tests.py
-  only:
-    changes:
-      - pybis/Dockerfile
-      - pybis/requirements.txt
-      - pybis/app/tests.py
+    - docker build --pull -t $CI_REGISTRY_IMAGE ./pybis
+    - docker push $CI_REGISTRY_IMAGE
+
+
+
+run-tests:
+  stage: test
+  services:
+    - openbis/debian-openbis
+  image:
+    name: $CI_REGISTRY_IMAGE
+    entrypoint: [""]
+  before_script:
+    - check_openbis.sh https://openbis:443
+  script:
+    - python /app/tests/test.py
