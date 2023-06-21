@@ -10,7 +10,7 @@ stages:
 
 
 services:
-  - name: openbis/debian-openbis
+  - name: registry-1.docker.io/openbis/debian-openbis
     alias: openbis
     variables:
       #Here you can configure some openbis options for the AS
