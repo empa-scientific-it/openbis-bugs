@@ -11,7 +11,7 @@ stages:
 
 services:
   - name: registry-1.docker.io/openbis/debian-openbis
-    alias: openbis
+    alias: openbis-local
     variables:
       #Here you can configure some openbis options for the AS
       SERVER_HOST_PORT: "localhost:8443"
@@ -44,8 +44,6 @@ build-docker:
 
 run-tests:
   stage: test
-  services:
-    - openbis
   image:
     name: $CI_REGISTRY_IMAGE
     entrypoint: [""]
