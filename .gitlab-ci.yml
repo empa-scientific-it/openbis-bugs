@@ -5,21 +5,18 @@ before_script:
 stages:
   - docker
   - test
- 
 
-build_pybis:
-  stage: docker
-  image: docker:latest
-  services:
-    - docker:dind
-  tags:
-    - dind
+
+
+run_tests:
+  stage: test
+  image: python:latest
   before_script:
-    - docker login -u $CI_REGISTRY_USER -p $CI_REGISTRY_PASSWORD $CI_REGISTRY
+    - pip install -r pybis/requirements.txt
   script:
-    - docker build --pull -t $CI_REGISTRY_IMAGE ./pybis
-    - docker push $CI_REGISTRY_IMAGE
+    - python ./pybis/app/tests.py
   only:
     changes:
       - ./pybis/Dockerfile
       - ./pybis/requirements.txt
+      - ./pybis/app/tests.py
