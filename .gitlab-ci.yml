@@ -36,9 +36,9 @@ build-docker:
     - docker push $CI_REGISTRY_IMAGE
   rules:
     - changes:
-      - /pybis/Dockerfile
-      - /pybis/requirements.txt
-      - /pybis/app/*
+        - /pybis/Dockerfile
+        - /pybis/requirements.txt
+        - /pybis/app/*
       when: always
 
 
