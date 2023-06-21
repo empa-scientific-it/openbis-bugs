@@ -44,8 +44,6 @@ build-docker:
 
 run-tests:
   stage: test
-  services:
-    - openbis-local
   image:
     name: $CI_REGISTRY_IMAGE
     entrypoint: [""]
