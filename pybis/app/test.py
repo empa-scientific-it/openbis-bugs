@@ -2,7 +2,7 @@ import pybis as pb
 import argparse as ap
 
 ap = ap.ArgumentParser()
-ap.add_argument("host", required=True, help="OpenBIS host")
+ap.add_argument("host", help="OpenBIS host")
 args = ap.parse_args()
 
 o = pb.Openbis(args.host, verify_certificates=False)
