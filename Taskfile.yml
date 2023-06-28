@@ -29,5 +29,5 @@ tasks:
       #Wait for openbis to be up
       - until ./docker_utils/get_health.sh openbis; do sleep 1; done
       #Run tests
-      - docker compose run  app python3 test.py
+      - docker compose run  app python3 test.py https://openbis:443
 

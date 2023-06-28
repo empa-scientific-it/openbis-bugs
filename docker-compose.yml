@@ -2,9 +2,6 @@ version: "3.9"
 volumes:
   #This stores the state of openbis, including logs
   openbis-state:
-  certs:
-  db_data: null
-  worker_dependency_cache: null
 networks:
   local:
     driver: bridge
@@ -20,10 +17,6 @@ services:
       #Enable the basic plugins
       - CORE_PLUGINS=enabled-modules = dataset-uploader, dataset-file-search, xls-import, eln-lims, openbis-ng-ui, search-store, user-management-maintenance
     volumes:
-      #External configuration files
-      # - type: bind
-      #   source: ./services/openbis/as_service.properties
-      #   target: /home/openbis/openbis_state/as_etc/service.properties
       #Openbis state
       - openbis-state:/home/openbis/openbis_state/
     ports:
