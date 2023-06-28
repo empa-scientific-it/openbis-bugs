@@ -16,5 +16,3 @@ e2 = o.new_object(type="ENTRY", space="DEFAULT", project="/DEFAULT/DEFAULT")
 e2.set_children([e1])
 e2.save()
 print(e2)
-
-e2.del_children([e1])

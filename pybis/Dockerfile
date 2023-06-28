@@ -1,7 +1,8 @@
 FROM python:3.10-slim-buster
+
 COPY requirements.txt .
 RUN pip install -r requirements.txt
-RUN apt-get update && apt-get install -y curl
-COPY app /app
+COPY app  /app
 WORKDIR /app
-RUN chmod +x /app/check_openbis.sh
+RUN chmod +x test.py
+CMD ./test.py
