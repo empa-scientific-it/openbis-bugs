@@ -12,7 +12,7 @@ networks:
 services:
   #Openbis
   openbis:
-    image: openbis/debian-openbis:latest
+    image: openbis/debian-openbis:${OPENBIS_VERSION}
     environment:
       #Here you can configure some openbis options for the AS
       - SERVER_HOST_PORT=localhost:8443
@@ -26,7 +26,6 @@ services:
       #   target: /home/openbis/openbis_state/as_etc/service.properties
       #Openbis state
       - openbis-state:/home/openbis/openbis_state/
-      - certs:/home/openbis/openbis_state/cert/
     ports:
       - 8443:443
       - 8444:8081
