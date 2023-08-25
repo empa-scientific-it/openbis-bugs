@@ -1,5 +1,8 @@
 version: 3
 
+dotenv: 
+  - .env
+
 tasks:
   
   python_build:
@@ -13,21 +16,25 @@ tasks:
     method: checksum
 
   openbis_up:
+    requires:
+      vars: [ OPENBIS_PORT ]
     cmds:
       - docker compose up openbis -d
     sources:
       - ./docker-compose.yml
     status:
-      - curl -k https://localhost:8443/openbis/openbis/rmi-application-server-v3.json -X POST | grep -q jsonrpc
+      - curl -k https://localhost:{{.OPENBIS_PORT}}/openbis/openbis/rmi-application-server-v3.json -X POST | grep -q jsonrpc
 
 
   run_test:
+    requires:
+      vars: [ OPENBIS_PORT ]
     deps:
       - python_build
       - openbis_up
     cmds: 
       #Wait for openbis to be up
-      - until ./docker_utils/get_health.sh openbis; do sleep 1; done
+      - until ./docker_utils/check_openbis.sh https://localhost:${OPENBIS_PORT}; do sleep 1; done
       #Run tests
-      - docker compose run  app python3 test.py https://openbis:443
+      - docker compose run  app python3 test.py https://openbis
 

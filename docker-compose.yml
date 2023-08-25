@@ -1,7 +1,8 @@
 version: "3.9"
+
 volumes:
   #This stores the state of openbis, including logs
-  openbis-state:
+  obstate:
 networks:
   local:
     driver: bridge
@@ -18,9 +19,9 @@ services:
       - CORE_PLUGINS=enabled-modules = dataset-uploader, dataset-file-search, xls-import, eln-lims, openbis-ng-ui, search-store, user-management-maintenance
     volumes:
       #Openbis state
-      - openbis-state:/home/openbis/openbis_state/
+      - obstate:/home/openbis/openbis_state/
     ports:
-      - 8443:443
+      - ${OPENBIS_PORT}:443
       - 8444:8081
     hostname: openbis
     healthcheck:
